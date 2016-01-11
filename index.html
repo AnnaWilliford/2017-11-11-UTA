@@ -13,8 +13,9 @@ enddate: "2016-01-31"
 instructor: ["Daren Card", "Rohit Rawat", "Heath Blackmon", "Nick Long", "James Titus-McQuillan", "Anna Williford"]
 helper: ["Audra Andrew", "Mehdi Eslameieh", "Devendra Umbrajkar", "Gaurav Kolekar"]
 contact: "awillifo@uta.edu"
+contact2: "rohitrowat@uta.edu"
 etherpad: "http://pad.software-carpentry.org/2016-01-30-UTA"
-eventbrite:  "20585144722"      # optional (insert the alphanumeric key for Eventbrite registration, e.g., "1234567890AB")
+eventbrite: # "20585144722"      # optional (insert the alphanumeric key for Eventbrite registration, e.g., "1234567890AB")
 ---
 <!--
   HEADER
@@ -127,7 +128,8 @@ eventbrite:  "20585144722"      # optional (insert the alphanumeric key for Even
   <strong>Contact</strong>:
   If you have questions about the workshop or need help with software installation, please email to
   {% if page.contact %}
-    <a href='mailto:{{page.contact}}'>{{page.contact}}</a>
+    <a href='mailto:{{page.contact}}'>{{page.contact}}</a> or
+    <a href='mailto:{{page.contact2}}'>{{page.contact2}}</a>
   {% else %}
     <a href='mailto:{{site.contact}}'>{{site.contact}}</a>
   {% endif %}
