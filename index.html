@@ -126,9 +126,10 @@ eventbrite: # "20585144722"      # optional (insert the alphanumeric key for Eve
 -->
 <p id="contact">
   <strong>Contact</strong>:
-  If you have questions about the workshop or need help with software installation, please email to
+  If you have questions about the workshop please email to
   {% if page.contact %}
-    <a href='mailto:{{page.contact}}'>{{page.contact}}</a> or
+    <a href='mailto:{{page.contact}}'>{{page.contact}}</a>
+    For help with software installation please email to
     <a href='mailto:{{page.contact2}}'>{{page.contact2}}</a>
   {% else %}
     <a href='mailto:{{site.contact}}'>{{site.contact}}</a>
