@@ -22,50 +22,374 @@ Lessons are based on Topics1-6 of http://swcarpentry.github.io/r-novice-gapminde
 * after Robert Gentleman and Ross Ihaka and the Bell Labs language ‘S’ 
 * statistical analysis, graphics, general purpose programming
 * open source, active contributing community, documentation
-* basic installation includes a handful of packages, but thousands are available
+* popular across multiple disciplines, expanded functionality through thousands of packages
+* available for all platforms
 
 
-##Introduction to R studio
+###Introduction to R studio
+*http://swcarpentry.github.io/r-novice-gapminder/01-rstudio-intro.html*
 
-###manage projects
+RStudio is a helpful interface to work with R, or integrated development environment (IDE) \
+for R (some of you may have used the regular R console already)
 
-###running interactive sessions (immediate output)
-* calculator
-    * `3+8`
-    * `34/2`
-    * `4**3`
-* text
-    * `This is text`
-* functions
-    * `getwd()` notice paranthesis - indicates that this is a function
+When you first open RStudio, you will be greeted by three panels:
 
-* functions with arguments
+  * The interactive R console (entire left)
+  * Environment/History (tabbed in upper right)
+  * Files/Plots/Packages/Help/Viewer (tabbed in lower right)
 
-    * `sqrt(4)`  4 here is a value passed to `sqrt()` function.
-Functions operate on objects that are enclosed in paranthesis
+Once you open files, such as R scripts, an editor panel will also open
+in the top left.
 
-**Challenge**
+Let's focus on interactive console window. This console in RStudio is the same as the one you \
+would get if you just typed in `R` in your commandline environment. Try it.
+This window is where you will run all of your code, and can be a
+useful environment to try out ideas before adding them to an R script
+file.
 
-Print the value of `sqrt(4)` using `print()` function. Try: 
+The first thing you will see in the R interactive session is a bunch
+of information, followed by a ">" and a blinking cursor. In many ways
+this is similar to the shell environment you learned about during the
+shell lessons: it operates on the same idea of a "Read, evaluate,
+print loop": you type in commands, R tries to execute them, and then
+returns a result.
 
-`print 2`, `print(2)`, `print sqrt(4)` and `print(sqrt(4))`
+#### Navigation
 
-Notice: *functions can be nested*
+Where am I? There is function to tell you that. Remember what it is in bash?
+
+```{r}
+getwd()  #notice paranthesis - indicates that this is a function
+```
+
+You can use `setwd()` to change your directory
+This can also be done through 'session' tab of the menu but this will not in your scripts.
 
 
-##Variables, data types, data structures
+#### Using R as a calculator
 
-####Variables:
-* assigning values to a variable
+The simplest thing you could do with R is do arithmetic:
+
+```{r}
+1 + 100
+```
+
+And R will print out the answer, with a preceding "[1]". Don't worry about this
+for now, we'll explain that later. For now think of it as indicating ouput.
+
+Just like bash, if you type in an incomplete command, R will wait for you to
+complete it:
+
+~~~ {.r}
+> 1 +
+~~~
+
+~~~ {.output}
++
+~~~
+
+Any time you hit return and the R session shows a "+" instead of a ">", it
+means it's waiting for you to complete the command. If you want to cancel
+a command you can simply hit "Esc" and RStudio will give you back the ">"
+prompt.
+
+When using R as a calculator, the order of operations is the same as you
+would have learnt back in school.
+
+From highest to lowest precedence:
+
+ * Parentheses: `(`, `)`
+ * Exponents: `^` or `**`
+ * Divide: `/`
+ * Multiply: `*`
+ * Add: `+`
+ * Subtract: `-`
+
+```{r}
+3 + 5 * 2
+```
+
+#### Mathematical Functions
+
+R has many built in mathematical functions. To call a function,
+we simply type its name, followed by  open and closing parentheses.
+Anything we type inside the parentheses is called the function's
+arguments:
+
+```{r}
+sqrt(16)  # square root
+```
+
+```{r}
+log10(10) # base-10 logarithm
+```
+
+Don't worry about trying to remember every function in R. You
+can simply look them up on google, or if you can remember the
+start of the function's name, use the tab completion in RStudio.
+
+This is one advantage that RStudio has over R on its own, it
+has autocompletion abilities that allow you to more easily
+look up functions, their arguments, and the values that they
+take.
+
+Typing a `?` before the name of a command will open the help page
+for that command. As well as providing a detailed description of
+the command and how it works, scrolling ot the bottom of the
+help page will usually show a collection of code examples which
+illustrate command usage. We'll go through an example later.
+
+#### Comparing things
+
+We can also do comparison in R:
+Add integer and string comaprison if you have time
+
+#### Variables and assignment
+
+We can store values in variables using the assignment operator `<-`, like this:
+
+```{r}
+x <- 1/40
+```
+
+Notice that assignment does not print a value. Instead, we stored it for later
+in something called a **variable**. `x` now contains the **value** `0.025`:
+
+```{r}
+x
+```
+
+More precisely, the stored value is a *decimal approximation* of
+this fraction called a [floating point number](http://en.wikipedia.org/wiki/Floating_point).
+
+Look for the `Environment` tab in one of the panes of RStudio, and you will see that `x` and its value
+have appeared. Our variable `x` can be used in place of a number in any calculation that expects a number:
+
+```{r}
+log(x)
+```
+
+Notice also that variables can be reassigned:
+
+```{r}
+x <- 100
+```
+
+`x` used to contain the value 0.025 and and now it has the value 100.
+
+Assignment values can contain the variable being assigned to:
+
+```{r}
+x <- x + 1 #notice how RStudio updates its description of x on the top right tab
+```
+
+The right hand side of the assignment can be any valid R expression.
+The right hand side is *fully evaluated* before the assignment occurs.
+
+Variable names can contain letters, numbers, underscores and periods. They
+cannot start with a number nor contain spaces at all. Different people use
+different conventions for long variable names, these include
+
+  * periods.between.words
+  * underscores\_between_words
+  * camelCaseToSeparateWords
+
+What you use is up to you, but **be consistent**.
+
+It is also possible to use the `=` operator for assignment:
+
+```{r}
+x = 1/40
+```
+
+But this is much less common among R users.  The most important thing is to
+**be consistent** with the operator you use. There are occasionally places
+where it is less confusing to use `<-` than `=`, and it is the most common
+symbol used in the community. So the recommendation is to use `<-`.
+
+
+#### Vectorization  (Probably after talking about vectors if I have time)
+
+One final thing to be aware of is that R is *vectorized*, meaning that
+variables and functions can have vectors as values. For example
+
+```{r}
+1:5
+2^(1:5)
+x <- 1:5
+2^x
+```
+
+This is incredibly powerful; we will discuss this further in an
+upcoming lesson.
+
+
+#### Managing your environment
+
+There are a few useful commands you can use to interact with the R session.
+
+`ls` will list all of the variables and functions stored in the global environment
+(your working R session):
+
+```{r}
+ls()
+```
+
+To list all objects, including hidden ones
+```{r}
+ls(all.names=TRUE)
+```
+
+You can use `rm` to delete objects you no longer need:
+
+```{r}
+rm(x)
+```
+
+If you have lots of things in your environment and want to delete all of them,
+you can pass the results of `ls` to the `rm` function:
+
+```{r}
+rm(list = ls())
+```
+
+In this case we've combined the two. Just like the order of operations, anything
+inside the innermost parentheses is evaluated first, and so on.
+
+In this case we've specified that the results of `ls` should be used for the
+`list` argument in `rm`. When assigning values to arguments by name, you *must*
+use the `=` operator!!
+
+If instead we use `<-`, there will be unintended side effects, or you may just
+get an error message:
+
+```{r, error=TRUE}
+rm(list <- ls())
+```
+
+#### R Packages (if have time)
+
+It is possible to add functions to R by writing a package, or by
+obtaining a package written by someone else. As of this writing, there
+are over 7,000 packages available on CRAN (the comprehensive R archive
+network). R and RStudio have functionality for managing packages:
+
+* You can see what packages are installed by typing
+  `installed.packages()`
+* You can install packages by typing `install.packages("packagename")`,
+  where `packagename` is the package name, in quotes.
+* You can update installed packages by typing `update.packages()`
+* You can remove a package with `remove.packages("packagename")`
+* You can make a package available for use with `library(packagename)`
+
+####Extra(Skip)
+
+Compare R in RStudio to R on the command line. Point out why it's nice to have all the extra views into what you're working on.
+
+* Console, Scripts, Environments, Plots
+* Avoid using shortcuts. 
+* Code and workflow is more reproducible if we can document everything that we do.
+* Our end goal is not just to "do stuff" but to do it in a way that anyone can easily and exactly replicate our workflow and results.
+* Typing in console vs typing in text editor and sending to console. Always type in editor and send to console!
+* Always add some comment lines to the top of your file with your name and date, and what the purpose of the script is
+
+> ## Challenge 1 
+>
+> What will be the value of each  variable  after each
+> statement in the following program?
+>
+> ```{r, eval=FALSE}
+> mass <- 47.5
+> age <- 122
+> mass <- mass * 2.3
+> age <- age - 20
+> ```
+>
+
+> ## Challenge 2 (skip)
+>
+> Print the value of `sqrt(4)` using `print()` function. Try: 
+>
+>`print 2`, `print(2)`, `print sqrt(4)` and `print(sqrt(4))`
+>
+>Notice: Arguments must be enclosed in paranthesis and functions can be nested
+
+
+> ## Challenge 3
+> 
+> Install the following packages: `ggplot2`, `plyr`, `gapminder`
+>
+
+
+### Project Management (if have time)
+*http://swcarpentry.github.io/r-novice-gapminder/02-project-intro.html*
+
+Keep your project organized! Start R project to keep all project-related files in one place
+And keep track of different versions of your documents.
+
+
+#### create a new project in RStudio:
+>
+> 1. Click the "File" menu button, then "New Project".
+> 2. Click "New Directory".
+> 3. Click "Empty Project".
+> 4. Type in the name of the directory to store your project, e.g. "my_project".
+> 5. Make sure that the checkbox for "Create a git repository" is selected.
+> 6. Click the "Create Project" button.
+>
+
+Now when we start R in this project directory, or open this project with RStudio,
+all of our work on this project will be entirely self-contained in this directory.
+
+* Have a separate folder to keep your original data. Do not modify.
+* Have separate output folder to keep your analysed/modified data in. Trat this folder \
+as disposable - it should all be able to be regenerated from your scripts.
+
+Let's make a data folder here. We wil get back to it when we ready to download our data sets
+
+#### Version Control
+
+We also set up our project to integrate with git, putting it under version control.
+RStudio has a nicer interface to git than shell, but is very limited in what it can
+do, so you will find yourself occasionally needing to use the shell. Let's go
+through and make an initial commit of our template files.
+
+The workspace/history pane has a tab for "Git". We can stage each file by checking the box:
+you will see a Green "A" next to stage files and folders, and yellow question marks next to
+files or folders git doesn't know about yet. RStudio also nicely shows you the difference
+between files from different commits.
+
+
+###Data types and Data structures
+*http://swcarpentry.github.io/r-novice-gapminder/04-data-structures-part1.html*
+
+Let's talk about building blocks of R.
+
+Before we do that let's load real dataset. Everything we do from now on untill the break is \
+directed to understand how data like this represented in mnipulated in R.
+
+Download this data set. Open it with Excel and let's take a look at this data
+https://annawilliford.github.io/2016-01-30-UTA/data/gapminderData.csv
+
+####Data types
+Before we can analyse any data, we'll need to have a strong
+understanding of the basic data types and data structures. It is **Very
+Important** to understand because these are the things you will
+manipulate on a day-to-day basis in R, and are the source of most
+frustration encountered by beginners. Many functions in R will work only on \
+speciic data type
+
+R has 5 basic atomic types (meaning they can't be broken down into anything smaller):
 
 ####Data Types:
 * numeric
-    * integer
-    * double
-* character
-* logical
-* complex
+    * integer (e.g, `2L`, `as.integer(3)`)
+    * double (i.e. decimal) (e.g, `-24.57`, `2.0`, `pi`)
+* character (e.g, `"a"`, `"swc"`, `'This is a cat'`)
+* logical (e.g., `TRUE`, `FALSE`)
+* complex (i.e. complex numbers) (e.g, `1 + 0i`, `1 + 4i`)
 
+```{r, eval=FALSE}
 typeof() # what is its atomic type?
 is.logical() # is it TRUE/FALSE data?
 is.numeric() # is it numeric?
@@ -73,20 +397,388 @@ is.integer() # is it an integer?
 is.complex() # is it complex number data?
 is.character() # is it character data?
 str()  # what is it?
+```
 
-####Data Structures:
-* vectors
+Let's come up with examples together
+
+> Use your knowledge of how to assign a value to
+> a variable, to create examples of data with the
+> following characteristics:
+>
+> 1) Variable name: 'answer', Type: logical
+> 2) Variable name: 'height', Type: numeric
+> 3) Variable name: 'dog_name', Type: character
+>
+> For each variable you've created, test that it
+> has the data type you intended. Do you find
+> anything unexpected?
+>
+> ```{r}
+> answer <- TRUE
+> height <- 150
+> dog_name <- "Snoopy"
+> is.logical(answer)
+> ```
+>
+> ```{r}
+> is.numeric(height)
+> ```
+>
+> ```{r}
+> is.character(dog_name)
+> ```
+>
+
+#AW. Say dd<-"workshop"; how to extract individuls letters?
+
+
+####Data Structures: Objects made up of atomic data types
+* vectors: most common and basic data structure;they are sometimes referred to as atomic vectors, \
+because importantly, they can **only contain one data type**. They are the building blocks of \
+every other data structure. A vector can contain any of the five types we introduced before
+
     * to create: 
-    * to access elements
-* lists
-    * to create:
-    * to access:
-        * list elements
-        * elements with list elements
-* factors
-* matrix
+        * empty vector with `vector()` or with concatinate function `c()`
+        * ex: `x <- vector()` : by default creates empty vector (length 0; type "logical")
+        * ex: `x <- c(10, 12, 45, 33)`; x<-c(1:10); seq(1,10, by=2)
+        * !!! numbers will be of "double" type unless specified that these are integers!\
+        `x<-c(10L, 12L, 45L, 33L)`
+    * to add:
+        * to add elements to a vector: `x <- c(x, 57)`
+    * to coerce:
+        *if you made a vector with different types, they will be coerced to the same data type
+        * You can also coerce vectors explicitly using the `as.<class_name>`:
+            *`as.character(x)`, `as.numercic(X)`
+    * functions to examine vectors:
+        * `head(x,n=2)`, `tail(x, n=6)`, `length(x)`, `str (x)`
+
+* lists: Lists act as containers, and can contain any type of data structure
+    * to create: `x <- list(1, "a", TRUE, 3L)`
+    * to coerce: oerced from other objects using `as.list()`
+    *
+        
+* factors:Factors are special vectors that represent categorical data.\
+Factors can be ordered or unordered 
+    *to create: `x <- factor(c("M", "F", "F", "M", "F"))`
+    *to order: `x <- factor(c("M", "F", "F", "M", "F"), levels=c("F","M"))`
+* matrices: multidemensional vectors
+    * `x<-matrix(rnorm(18), ncol=6, nrow=3)`
+    * functions to examine dim(x), str(x), nrow(x), ncol(x), length()
+    * check out `?matrix` for more details
+
 * data frames
 
+
+> Create a list of length two containing a character vector for each of the 
+> sections in this part of the workshop:
+>
+> * Data types
+> * Data structures
+>
+> Populate each character vector with the names of the data types and data
+> structures we've seen so far.
+>
+> ```{r, eval=FALSE}
+> my_list <- list(
+>   data_types = c("logical", "integer", "double", "complex", "character"),
+>   data_structures = c("vector", "matrix", "factor", "list")
+> )
+> ```
+>
+
+###Data frames
+*https://github.com/swcarpentry/r-novice-gapminder/blob/gh-pages/05-data-structures-part2.Rmd*
+
+#### Data frames
+
+Data frames are similar to matrices, except each column can be a
+different atomic type. A data frames is the standard structure for
+storing and manipulating rectangular data sets.  Underneath the hood,
+data frames are really lists, where each element is an atomic vector,
+with the added restriction that they're all the same length.  As you
+will see, if we pull out one column of a data frame,we will have a
+vector. You will probably find that data frames are more complicated
+than vectors and other data structures we have considered, but they
+provide powerful capabilities.
+
+
+Data frames can be created manually with the `data.frame` function:
+
+```{r}
+df <- data.frame(id = c('a', 'b', 'c', 'd', 'e', 'f'), x = 1:6, y = c(214:219))
+df
+```
+
+> ## Challenge 1: Data frames
+>
+> Try using the `length` function to query
+> your data frame `df`. Does it give the result
+> you expect?
+>
+
+Each column in the data frame is simply a list element, which is why
+when you ask for the `length` of the data frame, it tells you the
+number of columns. If you actually want the number of rows, you can
+use the `nrow` function.
+
+#### Functions to examnine dataframe:
+
+* str(df) # A full summary of the entire object
+* nrow()
+* ncol()
+* dim() # Dimensions of the object - also try nrow(), ncol()
+* class() # what is the data structure?
+* typeof() # what is its atomic type?
+* attributes() # does it have any metadata?
+
+
+###Working with our Gapminder data set
+
+Now let's see how we can get out gapminder dataset into R.
+
+Download gapminder dataset:
+
+To download from shell (use Git Bash we worked with earlier): [add URL to etherpad]
+
+* `curl -O https://annawilliford.github.io/2016-01-30-UTA/data/gapminderData.csv`
+
+To download from R:
+
+* `download.file("https://annawilliford.github.io/2016-01-30/data/gapminderData.csv", destfile="gapminderData.txt", method="libcurl")`
+
+&nbsp;&nbsp;&nbsp;&nbsp;At this point you just have the data file in the directory of your choice. \
+&nbsp;&nbsp;&nbsp;&nbsp;Take a look at your directory structure in the bottom right window under Files tab
+
+To load data into R: assign file to a variable `myData`
+Method 1:
+
+* `myData<-read.csv("gapminderData.csv")`
+
+Take a look at a new object
+
+* `myData`
+
+A bit hard to see?
+Different ways to see what your object looks like: 
+
+* Use `head()` function:
+    * `head(myData)`
+
+* Look at the top right window, environment tab - gives you a brief summary \
+of the object and Excel-like view of the data
+
+* Use `str()` help function
+    * str(myData)
+
+Method 2. Use read.table() function
+
+**Challenge**
+Use help functions to read about read.table `?read.table()` or `args(read.table)` \
+and use it load file into R. It might be helpful to compare `args(read.csv)` and `args(read.table)`
+
+Look at `dim(myData)` output after each try. Is it different? Why?
+
+**Answer**
+* myData2<-read.table("gapminderData.csv", header=TRUE, sep = ",")
+
+Unless we record the data, we do not know its format. It is easiest to take a look at the data \
+with other tools.  How would you use bash shell to see the format of gapminderData.csv?
+
+### Subsetting
+*https://github.com/swcarpentry/r-novice-gapminder/blob/gh-pages/06-data-subsetting.Rmd*
+
+Let's learn how to extract elements from various data structures:
+
+* vectors: `x <- c(1:10)'
+    * by index: y<-x[3:4]; \
+The square brackets operator is just like any other function. For atomic vectors \
+(and matrices), it means "get me the nth element".
+    * If we use a negative number as the index of a vector, R will return \
+    every element *except* for the one specified: `y<-x[-c(3:4)]`
+
+
+* Factor subsetting:
+
+Now that we've explored the different ways to subset vectors, how
+do we subset the other data structures?
+
+Factor subsetting works the same way as vector subsetting.
+
+```{r}
+f <- factor(c("a", "a", "b", "c", "c", "d"))
+f[f == "a"]
+f[f %in% c("b", "c")]
+f[1:3]
+```
+
+Matrices are also subsetted using the `[` function. In this case
+it takes two arguments: the first applying to the rows, the second
+to its columns:
+
+```{r}
+set.seed(1)
+m <- matrix(rnorm(6*4), ncol=4, nrow=6)
+m[3:4, c(3,1)]
+```
+
+You can leave the first or second arguments blank to retrieve all the
+rows or columns respectively:
+
+```{r}
+m[, c(3,4)]
+```
+
+## List subsetting
+
+Now we'll introduce some new subsetting operators. There are three functions
+used to subset lists. `[`, as we've seen for atomic vectors and matrices,
+as well as `[[` and `$`.
+
+Using `[` will always return a list. If you want to *subset* a list, but not
+*extract* an element, then you will likely use `[`.
+
+```{r}
+xlist <- list(a = "Software Carpentry", b = 1:10, data = head(iris))
+xlist[1]
+```
+
+This returns a *list with one element*.
+
+We can subset elements of a list exactly the same was as atomic
+vectors using `[`. Comparison operations however won't work as
+they're not recursive, they will try to condition on the data structures
+in each element of the list, not the individual elements within those
+data structures.
+
+```{r}
+xlist[1:2]
+```
+
+To extract individual elements of a list, you need to use the double-square
+bracket function: `[[`.
+
+```{r}
+xlist[[1]]
+```
+
+The `$` function is a shorthand way for extracting elements by name:
+
+```{r}
+xlist$data
+```
+
+## Data frames
+
+Remember the data frames are lists underneath the hood, so similar rules
+apply. However they are also two dimensional objects:
+
+`[` with one argument will act the same was as for lists, where each list
+element corresponds to a column. The resulting object will be a data frame:
+
+
+`head(myData[3])`
+
+
+Similarly, `[[` will act to extract *a single column*:
+
+```{r}
+head(myData[["lifeExp"]])
+```
+
+And `$` provides a convenient shorthand to extract columns by name:
+
+```{r}
+head(myData$year)
+```
+
+With two arguments, `[` behaves the same way as for matrices:
+
+```{r}
+myData[1:3,]
+```
+
+If we subset a single row, the result will be a data frame (because
+the elements are mixed types):
+
+```{r}
+gapminder[3,]
+```
+
+But for a single column the result will be a vector (this can
+be changed with the third argument, `drop = FALSE`).
+
+> ## Challenge 7 {.challenge}
+>
+> Fix each of the following common data frame subsetting errors:
+>
+> 1. Extract observations collected for the year 1957
+>
+> ```{r, eval=FALSE}
+> gapminder[gapminder$year = 1957,]
+> ```
+>
+> 2. Extract all columns except 1 through to 4
+>
+> ```{r, eval=FALSE}
+> gapminder[,-1:4]
+> ```
+>
+> 3. Extract the rows where the life expectancy is longer the 80 years
+>
+> ```{r, eval=FALSE}
+> gapminder[gapminder$lifeExp > 80]
+> ```
+>
+> 4. Extract the first row, and the fourth and fifth columns
+>   (`lifeExp` and `gdpPercap`).
+>
+> ```{r, eval=FALSE}
+> gapminder[1, 4, 5]
+> ```
+>
+> 5. Advanced: extract rows that contain information for the years 2002
+>    and 2007
+>
+> ```{r, eval=FALSE}
+> gapminder[gapminder$year == 2002 | 2007,]
+> ```
+>
+
+> ## Challenge 8 {.challenge}
+>
+> 1. Why does `gapminder[1:20]` return an error? How does it differ from `gapminder[1:20, ]`?
+>
+>
+> 2. Create a new `data.frame` called `gapminder_small` that only contains rows 1 through 9
+> and 19 through 23. You can do this in one or two steps.
+>
+
+
+
+## END of Intro to R lesson
+
+
+
+
+
+
+
+
+
+##Skip
+We can add columns or rows to a data.frame using `cbind` or `rbind`
+(these are the two-dimensional equivalents of the `c` function):
+
+#### Adding columns to a data frame
+
+To add a column we can use `cbind`:
+
+
+df <- cbind(df, count=c(6:1)
+
+
+Add rows: (this will not work, need factor conversion, have a different example of adata frame, \
+just mention rbind)
 
 
 ###Help functions

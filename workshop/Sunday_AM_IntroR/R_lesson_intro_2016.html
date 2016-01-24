@@ -88,85 +88,446 @@ img {
 <li>after Robert Gentleman and Ross Ihaka and the Bell Labs language ‘S’</li>
 <li>statistical analysis, graphics, general purpose programming</li>
 <li>open source, active contributing community, documentation</li>
-<li>basic installation includes a handful of packages, but thousands are available</li>
+<li>popular across multiple disciplines, expanded functionality through thousands of packages</li>
+<li>available for all platforms</li>
+</ul>
+<div id="introduction-to-r-studio" class="section level3">
+<h3>Introduction to R studio</h3>
+<p><em><a href="http://swcarpentry.github.io/r-novice-gapminder/01-rstudio-intro.html">http://swcarpentry.github.io/r-novice-gapminder/01-rstudio-intro.html</a></em></p>
+<p>RStudio is a helpful interface to work with R, or integrated development environment (IDE)<br />for R (some of you may have used the regular R console already)</p>
+<p>When you first open RStudio, you will be greeted by three panels:</p>
+<ul>
+<li>The interactive R console (entire left)</li>
+<li>Environment/History (tabbed in upper right)</li>
+<li>Files/Plots/Packages/Help/Viewer (tabbed in lower right)</li>
+</ul>
+<p>Once you open files, such as R scripts, an editor panel will also open in the top left.</p>
+<p>Let’s focus on interactive console window. This console in RStudio is the same as the one you<br />would get if you just typed in <code>R</code> in your commandline environment. Try it. This window is where you will run all of your code, and can be a useful environment to try out ideas before adding them to an R script file.</p>
+<p>The first thing you will see in the R interactive session is a bunch of information, followed by a “&gt;” and a blinking cursor. In many ways this is similar to the shell environment you learned about during the shell lessons: it operates on the same idea of a “Read, evaluate, print loop”: you type in commands, R tries to execute them, and then returns a result.</p>
+<div id="navigation" class="section level4">
+<h4>Navigation</h4>
+<p>Where am I? There is function to tell you that. Remember what it is in bash?</p>
+<pre class="r"><code>getwd()  #notice paranthesis - indicates that this is a function</code></pre>
+<pre><code>## [1] &quot;C:/Users/Anna/Desktop/Anya/SoftwareCarpentry/Workshop1_Jan_2016/WorkshopMaterials/R_lessons&quot;</code></pre>
+<p>You can use <code>setwd()</code> to change your directory This can also be done through ‘session’ tab of the menu but this will not in your scripts.</p>
+</div>
+<div id="using-r-as-a-calculator" class="section level4">
+<h4>Using R as a calculator</h4>
+<p>The simplest thing you could do with R is do arithmetic:</p>
+<pre class="r"><code>1 + 100</code></pre>
+<pre><code>## [1] 101</code></pre>
+<p>And R will print out the answer, with a preceding “[1]”. Don’t worry about this for now, we’ll explain that later. For now think of it as indicating ouput.</p>
+<p>Just like bash, if you type in an incomplete command, R will wait for you to complete it:</p>
+<pre class="r"><code>&gt; 1 +</code></pre>
+<pre class="output"><code>+</code></pre>
+<p>Any time you hit return and the R session shows a “+” instead of a “&gt;”, it means it’s waiting for you to complete the command. If you want to cancel a command you can simply hit “Esc” and RStudio will give you back the “&gt;” prompt.</p>
+<p>When using R as a calculator, the order of operations is the same as you would have learnt back in school.</p>
+<p>From highest to lowest precedence:</p>
+<ul>
+<li>Parentheses: <code>(</code>, <code>)</code></li>
+<li>Exponents: <code>^</code> or <code>**</code></li>
+<li>Divide: <code>/</code></li>
+<li>Multiply: <code>*</code></li>
+<li>Add: <code>+</code></li>
+<li>Subtract: <code>-</code></li>
+</ul>
+<pre class="r"><code>3 + 5 * 2</code></pre>
+<pre><code>## [1] 13</code></pre>
+</div>
+<div id="mathematical-functions" class="section level4">
+<h4>Mathematical Functions</h4>
+<p>R has many built in mathematical functions. To call a function, we simply type its name, followed by open and closing parentheses. Anything we type inside the parentheses is called the function’s arguments:</p>
+<pre class="r"><code>sqrt(16)  # square root</code></pre>
+<pre><code>## [1] 4</code></pre>
+<pre class="r"><code>log10(10) # base-10 logarithm</code></pre>
+<pre><code>## [1] 1</code></pre>
+<p>Don’t worry about trying to remember every function in R. You can simply look them up on google, or if you can remember the start of the function’s name, use the tab completion in RStudio.</p>
+<p>This is one advantage that RStudio has over R on its own, it has autocompletion abilities that allow you to more easily look up functions, their arguments, and the values that they take.</p>
+<p>Typing a <code>?</code> before the name of a command will open the help page for that command. As well as providing a detailed description of the command and how it works, scrolling ot the bottom of the help page will usually show a collection of code examples which illustrate command usage. We’ll go through an example later.</p>
+</div>
+<div id="comparing-things" class="section level4">
+<h4>Comparing things</h4>
+<p>We can also do comparison in R: Add integer and string comaprison if you have time</p>
+</div>
+<div id="variables-and-assignment" class="section level4">
+<h4>Variables and assignment</h4>
+<p>We can store values in variables using the assignment operator <code>&lt;-</code>, like this:</p>
+<pre class="r"><code>x &lt;- 1/40</code></pre>
+<p>Notice that assignment does not print a value. Instead, we stored it for later in something called a <strong>variable</strong>. <code>x</code> now contains the <strong>value</strong> <code>0.025</code>:</p>
+<pre class="r"><code>x</code></pre>
+<pre><code>## [1] 0.025</code></pre>
+<p>More precisely, the stored value is a <em>decimal approximation</em> of this fraction called a <a href="http://en.wikipedia.org/wiki/Floating_point">floating point number</a>.</p>
+<p>Look for the <code>Environment</code> tab in one of the panes of RStudio, and you will see that <code>x</code> and its value have appeared. Our variable <code>x</code> can be used in place of a number in any calculation that expects a number:</p>
+<pre class="r"><code>log(x)</code></pre>
+<pre><code>## [1] -3.688879</code></pre>
+<p>Notice also that variables can be reassigned:</p>
+<pre class="r"><code>x &lt;- 100</code></pre>
+<p><code>x</code> used to contain the value 0.025 and and now it has the value 100.</p>
+<p>Assignment values can contain the variable being assigned to:</p>
+<pre class="r"><code>x &lt;- x + 1 #notice how RStudio updates its description of x on the top right tab</code></pre>
+<p>The right hand side of the assignment can be any valid R expression. The right hand side is <em>fully evaluated</em> before the assignment occurs.</p>
+<p>Variable names can contain letters, numbers, underscores and periods. They cannot start with a number nor contain spaces at all. Different people use different conventions for long variable names, these include</p>
+<ul>
+<li>periods.between.words</li>
+<li>underscores_between_words</li>
+<li>camelCaseToSeparateWords</li>
+</ul>
+<p>What you use is up to you, but <strong>be consistent</strong>.</p>
+<p>It is also possible to use the <code>=</code> operator for assignment:</p>
+<pre class="r"><code>x = 1/40</code></pre>
+<p>But this is much less common among R users. The most important thing is to <strong>be consistent</strong> with the operator you use. There are occasionally places where it is less confusing to use <code>&lt;-</code> than <code>=</code>, and it is the most common symbol used in the community. So the recommendation is to use <code>&lt;-</code>.</p>
+</div>
+<div id="vectorization-probably-after-talking-about-vectors-if-i-have-time" class="section level4">
+<h4>Vectorization (Probably after talking about vectors if I have time)</h4>
+<p>One final thing to be aware of is that R is <em>vectorized</em>, meaning that variables and functions can have vectors as values. For example</p>
+<pre class="r"><code>1:5</code></pre>
+<pre><code>## [1] 1 2 3 4 5</code></pre>
+<pre class="r"><code>2^(1:5)</code></pre>
+<pre><code>## [1]  2  4  8 16 32</code></pre>
+<pre class="r"><code>x &lt;- 1:5
+2^x</code></pre>
+<pre><code>## [1]  2  4  8 16 32</code></pre>
+<p>This is incredibly powerful; we will discuss this further in an upcoming lesson.</p>
+</div>
+<div id="managing-your-environment" class="section level4">
+<h4>Managing your environment</h4>
+<p>There are a few useful commands you can use to interact with the R session.</p>
+<p><code>ls</code> will list all of the variables and functions stored in the global environment (your working R session):</p>
+<pre class="r"><code>ls()</code></pre>
+<pre><code>## [1] &quot;x&quot;</code></pre>
+<p>To list all objects, including hidden ones</p>
+<pre class="r"><code>ls(all.names=TRUE)</code></pre>
+<pre><code>## [1] &quot;x&quot;</code></pre>
+<p>You can use <code>rm</code> to delete objects you no longer need:</p>
+<pre class="r"><code>rm(x)</code></pre>
+<p>If you have lots of things in your environment and want to delete all of them, you can pass the results of <code>ls</code> to the <code>rm</code> function:</p>
+<pre class="r"><code>rm(list = ls())</code></pre>
+<p>In this case we’ve combined the two. Just like the order of operations, anything inside the innermost parentheses is evaluated first, and so on.</p>
+<p>In this case we’ve specified that the results of <code>ls</code> should be used for the <code>list</code> argument in <code>rm</code>. When assigning values to arguments by name, you <em>must</em> use the <code>=</code> operator!!</p>
+<p>If instead we use <code>&lt;-</code>, there will be unintended side effects, or you may just get an error message:</p>
+<pre class="r"><code>rm(list &lt;- ls())</code></pre>
+<pre><code>## Error in rm(list &lt;- ls()): ... must contain names or character strings</code></pre>
+</div>
+<div id="r-packages-if-have-time" class="section level4">
+<h4>R Packages (if have time)</h4>
+<p>It is possible to add functions to R by writing a package, or by obtaining a package written by someone else. As of this writing, there are over 7,000 packages available on CRAN (the comprehensive R archive network). R and RStudio have functionality for managing packages:</p>
+<ul>
+<li>You can see what packages are installed by typing <code>installed.packages()</code></li>
+<li>You can install packages by typing <code>install.packages(&quot;packagename&quot;)</code>, where <code>packagename</code> is the package name, in quotes.</li>
+<li>You can update installed packages by typing <code>update.packages()</code></li>
+<li>You can remove a package with <code>remove.packages(&quot;packagename&quot;)</code></li>
+<li>You can make a package available for use with <code>library(packagename)</code></li>
 </ul>
 </div>
-<div id="introduction-to-r-studio" class="section level2">
-<h2>Introduction to R studio</h2>
-<div id="manage-projects" class="section level3">
-<h3>manage projects</h3>
-</div>
-<div id="running-interactive-sessions-immediate-output" class="section level3">
-<h3>running interactive sessions (immediate output)</h3>
+<div id="extraskip" class="section level4">
+<h4>Extra(Skip)</h4>
+<p>Compare R in RStudio to R on the command line. Point out why it’s nice to have all the extra views into what you’re working on.</p>
 <ul>
-<li>calculator
-<ul>
-<li><code>3+8</code></li>
-<li><code>34/2</code></li>
-<li><code>4**3</code></li>
-</ul></li>
-<li>text
-<ul>
-<li><code>This is text</code></li>
-</ul></li>
-<li>functions
-<ul>
-<li><code>getwd()</code> notice paranthesis - indicates that this is a function</li>
-</ul></li>
-<li><p>functions with arguments</p>
-<ul>
-<li><code>sqrt(4)</code> 4 here is a value passed to <code>sqrt()</code> function. Functions operate on objects that are enclosed in paranthesis</li>
-</ul></li>
+<li>Console, Scripts, Environments, Plots</li>
+<li>Avoid using shortcuts.</li>
+<li>Code and workflow is more reproducible if we can document everything that we do.</li>
+<li>Our end goal is not just to “do stuff” but to do it in a way that anyone can easily and exactly replicate our workflow and results.</li>
+<li>Typing in console vs typing in text editor and sending to console. Always type in editor and send to console!</li>
+<li>Always add some comment lines to the top of your file with your name and date, and what the purpose of the script is</li>
 </ul>
-<p><strong>Challenge</strong></p>
+<blockquote>
+<h2>Challenge 1</h2>
+<p>What will be the value of each variable after each statement in the following program?</p>
+<pre class="r"><code>mass &lt;- 47.5
+age &lt;- 122
+mass &lt;- mass * 2.3
+age &lt;- age - 20</code></pre>
+</blockquote>
+<blockquote>
+<h2>Challenge 2 (skip)</h2>
 <p>Print the value of <code>sqrt(4)</code> using <code>print()</code> function. Try:</p>
 <p><code>print 2</code>, <code>print(2)</code>, <code>print sqrt(4)</code> and <code>print(sqrt(4))</code></p>
-<p>Notice: <em>functions can be nested</em></p>
+<p>Notice: Arguments must be enclosed in paranthesis and functions can be nested</p>
+</blockquote>
+<blockquote>
+<h2>Challenge 3</h2>
+<p>Install the following packages: <code>ggplot2</code>, <code>plyr</code>, <code>gapminder</code></p>
+</blockquote>
 </div>
 </div>
-<div id="variables-data-types-data-structures" class="section level2">
-<h2>Variables, data types, data structures</h2>
-<div id="variables" class="section level4">
-<h4>Variables:</h4>
+<div id="project-management-if-have-time" class="section level3">
+<h3>Project Management (if have time)</h3>
+<p><em><a href="http://swcarpentry.github.io/r-novice-gapminder/02-project-intro.html">http://swcarpentry.github.io/r-novice-gapminder/02-project-intro.html</a></em></p>
+<p>Keep your project organized! Start R project to keep all project-related files in one place And keep track of different versions of your documents.</p>
+<div id="create-a-new-project-in-rstudio" class="section level4">
+<h4>create a new project in RStudio:</h4>
+<blockquote>
+<ol style="list-style-type: decimal">
+<li>Click the “File” menu button, then “New Project”.</li>
+<li>Click “New Directory”.</li>
+<li>Click “Empty Project”.</li>
+<li>Type in the name of the directory to store your project, e.g. “my_project”.</li>
+<li>Make sure that the checkbox for “Create a git repository” is selected.</li>
+<li>Click the “Create Project” button.</li>
+</ol>
+</blockquote>
+<p>Now when we start R in this project directory, or open this project with RStudio, all of our work on this project will be entirely self-contained in this directory.</p>
 <ul>
-<li>assigning values to a variable</li>
+<li>Have a separate folder to keep your original data. Do not modify.</li>
+<li>Have separate output folder to keep your analysed/modified data in. Trat this folder<br />as disposable - it should all be able to be regenerated from your scripts.</li>
 </ul>
+<p>Let’s make a data folder here. We wil get back to it when we ready to download our data sets</p>
 </div>
+<div id="version-control" class="section level4">
+<h4>Version Control</h4>
+<p>We also set up our project to integrate with git, putting it under version control. RStudio has a nicer interface to git than shell, but is very limited in what it can do, so you will find yourself occasionally needing to use the shell. Let’s go through and make an initial commit of our template files.</p>
+<p>The workspace/history pane has a tab for “Git”. We can stage each file by checking the box: you will see a Green “A” next to stage files and folders, and yellow question marks next to files or folders git doesn’t know about yet. RStudio also nicely shows you the difference between files from different commits.</p>
+</div>
+</div>
+<div id="data-types-and-data-structures" class="section level3">
+<h3>Data types and Data structures</h3>
+<p><em><a href="http://swcarpentry.github.io/r-novice-gapminder/04-data-structures-part1.html">http://swcarpentry.github.io/r-novice-gapminder/04-data-structures-part1.html</a></em></p>
+<p>Let’s talk about building blocks of R.</p>
+<p>Before we do that let’s load real dataset. Everything we do from now on untill the break is<br />directed to understand how data like this represented in mnipulated in R.</p>
+<p>Download this data set. Open it with Excel and let’s take a look at this data <a href="https://annawilliford.github.io/2016-01-30-UTA/data/gapminderData.csv">https://annawilliford.github.io/2016-01-30-UTA/data/gapminderData.csv</a></p>
 <div id="data-types" class="section level4">
+<h4>Data types</h4>
+<p>Before we can analyse any data, we’ll need to have a strong understanding of the basic data types and data structures. It is <strong>Very Important</strong> to understand because these are the things you will manipulate on a day-to-day basis in R, and are the source of most frustration encountered by beginners. Many functions in R will work only on<br />speciic data type</p>
+<p>R has 5 basic atomic types (meaning they can’t be broken down into anything smaller):</p>
+</div>
+<div id="data-types-1" class="section level4">
 <h4>Data Types:</h4>
 <ul>
 <li>numeric
 <ul>
-<li>integer</li>
-<li>double</li>
+<li>integer (e.g, <code>2L</code>, <code>as.integer(3)</code>)</li>
+<li>double (i.e. decimal) (e.g, <code>-24.57</code>, <code>2.0</code>, <code>pi</code>)</li>
 </ul></li>
-<li>character</li>
-<li>logical</li>
-<li>complex</li>
+<li>character (e.g, <code>&quot;a&quot;</code>, <code>&quot;swc&quot;</code>, <code>'This is a cat'</code>)</li>
+<li>logical (e.g., <code>TRUE</code>, <code>FALSE</code>)</li>
+<li>complex (i.e. complex numbers) (e.g, <code>1 + 0i</code>, <code>1 + 4i</code>)</li>
 </ul>
-<p>typeof() # what is its atomic type? is.logical() # is it TRUE/FALSE data? is.numeric() # is it numeric? is.integer() # is it an integer? is.complex() # is it complex number data? is.character() # is it character data? str() # what is it?</p>
+<pre class="r"><code>typeof() # what is its atomic type?
+is.logical() # is it TRUE/FALSE data?
+is.numeric() # is it numeric?
+is.integer() # is it an integer?
+is.complex() # is it complex number data?
+is.character() # is it character data?
+str()  # what is it?</code></pre>
+<p>Let’s come up with examples together</p>
+<blockquote>
+<p>Use your knowledge of how to assign a value to a variable, to create examples of data with the following characteristics:</p>
+<ol style="list-style-type: decimal">
+<li>Variable name: ‘answer’, Type: logical</li>
+<li>Variable name: ‘height’, Type: numeric</li>
+<li>Variable name: ‘dog_name’, Type: character</li>
+</ol>
+<p>For each variable you’ve created, test that it has the data type you intended. Do you find anything unexpected?</p>
+<pre class="r"><code>answer &lt;- TRUE
+height &lt;- 150
+dog_name &lt;- &quot;Snoopy&quot;
+is.logical(answer)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>is.numeric(height)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>is.character(dog_name)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+</blockquote>
 </div>
-<div id="data-structures" class="section level4">
-<h4>Data Structures:</h4>
+</div>
+</div>
+<div id="aw.-say-dd-workshop-how-to-extract-individuls-letters" class="section level1">
+<h1>AW. Say dd&lt;-“workshop”; how to extract individuls letters?</h1>
+<div id="data-structures-objects-made-up-of-atomic-data-types" class="section level4">
+<h4>Data Structures: Objects made up of atomic data types</h4>
 <ul>
-<li>vectors
+<li><p>vectors: most common and basic data structure;they are sometimes referred to as atomic vectors,<br />because importantly, they can <strong>only contain one data type</strong>. They are the building blocks of<br />every other data structure. A vector can contain any of the five types we introduced before</p>
 <ul>
-<li>to create:</li>
-<li>to access elements</li>
+<li>to create:
+<ul>
+<li>empty vector with <code>vector()</code> or with concatinate function <code>c()</code></li>
+<li>ex: <code>x &lt;- vector()</code> : by default creates empty vector (length 0; type “logical”)</li>
+<li>ex: <code>x &lt;- c(10, 12, 45, 33)</code>; x&lt;-c(1:10); seq(1,10, by=2)</li>
+<li>!!! numbers will be of “double” type unless specified that these are integers!<br /><code>x&lt;-c(10L, 12L, 45L, 33L)</code></li>
 </ul></li>
-<li>lists
+<li>to add:
 <ul>
-<li>to create:</li>
-<li>to access:
+<li>to add elements to a vector: <code>x &lt;- c(x, 57)</code></li>
+</ul></li>
+<li>to coerce: *if you made a vector with different types, they will be coerced to the same data type
 <ul>
-<li>list elements</li>
-<li>elements with list elements</li>
+<li>You can also coerce vectors explicitly using the <code>as.&lt;class_name&gt;</code>: *<code>as.character(x)</code>, <code>as.numercic(X)</code></li>
+</ul></li>
+<li>functions to examine vectors:
+<ul>
+<li><code>head(x,n=2)</code>, <code>tail(x, n=6)</code>, <code>length(x)</code>, <code>str (x)</code></li>
 </ul></li>
 </ul></li>
-<li>factors</li>
-<li>matrix</li>
-<li>data frames</li>
+<li>lists: Lists act as containers, and can contain any type of data structure
+<ul>
+<li>to create: <code>x &lt;- list(1, &quot;a&quot;, TRUE, 3L)</code></li>
+<li>to coerce: oerced from other objects using <code>as.list()</code></li>
+<li></li>
+</ul></li>
+<li>factors:Factors are special vectors that represent categorical data.<br />Factors can be ordered or unordered <em>to create: <code>x &lt;- factor(c(&quot;M&quot;, &quot;F&quot;, &quot;F&quot;, &quot;M&quot;, &quot;F&quot;))</code> </em>to order: <code>x &lt;- factor(c(&quot;M&quot;, &quot;F&quot;, &quot;F&quot;, &quot;M&quot;, &quot;F&quot;), levels=c(&quot;F&quot;,&quot;M&quot;))</code></li>
+<li>matrices: multidemensional vectors
+<ul>
+<li><code>x&lt;-matrix(rnorm(18), ncol=6, nrow=3)</code></li>
+<li>functions to examine dim(x), str(x), nrow(x), ncol(x), length()</li>
+<li>check out <code>?matrix</code> for more details</li>
+</ul></li>
+<li><p>data frames</p></li>
 </ul>
+<blockquote>
+<p>Create a list of length two containing a character vector for each of the sections in this part of the workshop:</p>
+<ul>
+<li>Data types</li>
+<li>Data structures</li>
+</ul>
+<p>Populate each character vector with the names of the data types and data structures we’ve seen so far.</p>
+<pre class="r"><code>my_list &lt;- list(
+  data_types = c(&quot;logical&quot;, &quot;integer&quot;, &quot;double&quot;, &quot;complex&quot;, &quot;character&quot;),
+  data_structures = c(&quot;vector&quot;, &quot;matrix&quot;, &quot;factor&quot;, &quot;list&quot;)
+)</code></pre>
+</blockquote>
+</div>
+<div id="data-frames" class="section level3">
+<h3>Data frames</h3>
+<p><em><a href="https://github.com/swcarpentry/r-novice-gapminder/blob/gh-pages/05-data-structures-part2.Rmd">https://github.com/swcarpentry/r-novice-gapminder/blob/gh-pages/05-data-structures-part2.Rmd</a></em></p>
+<div id="data-frames-1" class="section level4">
+<h4>Data frames</h4>
+<p>Data frames are similar to matrices, except each column can be a different atomic type. A data frames is the standard structure for storing and manipulating rectangular data sets. Underneath the hood, data frames are really lists, where each element is an atomic vector, with the added restriction that they’re all the same length. As you will see, if we pull out one column of a data frame,we will have a vector. You will probably find that data frames are more complicated than vectors and other data structures we have considered, but they provide powerful capabilities.</p>
+<p>Data frames can be created manually with the <code>data.frame</code> function:</p>
+<pre class="r"><code>df &lt;- data.frame(id = c('a', 'b', 'c', 'd', 'e', 'f'), x = 1:6, y = c(214:219))
+df</code></pre>
+<pre><code>##   id x   y
+## 1  a 1 214
+## 2  b 2 215
+## 3  c 3 216
+## 4  d 4 217
+## 5  e 5 218
+## 6  f 6 219</code></pre>
+<blockquote>
+<h2>Challenge 1: Data frames</h2>
+<p>Try using the <code>length</code> function to query your data frame <code>df</code>. Does it give the result you expect?</p>
+</blockquote>
+<p>Each column in the data frame is simply a list element, which is why when you ask for the <code>length</code> of the data frame, it tells you the number of columns. If you actually want the number of rows, you can use the <code>nrow</code> function.</p>
+</div>
+<div id="functions-to-examnine-dataframe" class="section level4">
+<h4>Functions to examnine dataframe:</h4>
+<ul>
+<li>str(df) # A full summary of the entire object</li>
+<li>nrow()</li>
+<li>ncol()</li>
+<li>dim() # Dimensions of the object - also try nrow(), ncol()</li>
+<li>class() # what is the data structure?</li>
+<li>typeof() # what is its atomic type?</li>
+<li>attributes() # does it have any metadata?</li>
+</ul>
+</div>
+</div>
+<div id="working-with-our-gapminder-data-set" class="section level3">
+<h3>Working with our Gapminder data set</h3>
+<p>Now let’s see how we can get out gapminder dataset into R.</p>
+<p>Download gapminder dataset:</p>
+<p>To download from shell (use Git Bash we worked with earlier): [add URL to etherpad]</p>
+<ul>
+<li><code>curl -O https://annawilliford.github.io/2016-01-30-UTA/data/gapminderData.csv</code></li>
+</ul>
+<p>To download from R:</p>
+<ul>
+<li><code>download.file(&quot;https://annawilliford.github.io/2016-01-30/data/gapminderData.csv&quot;, destfile=&quot;gapminderData.txt&quot;, method=&quot;libcurl&quot;)</code></li>
+</ul>
+<p>    At this point you just have the data file in the directory of your choice.<br />    Take a look at your directory structure in the bottom right window under Files tab</p>
+<p>To load data into R: assign file to a variable <code>myData</code> Method 1:</p>
+<ul>
+<li><code>myData&lt;-read.csv(&quot;gapminderData.csv&quot;)</code></li>
+</ul>
+<p>Take a look at a new object</p>
+<ul>
+<li><code>myData</code></li>
+</ul>
+<p>A bit hard to see? Different ways to see what your object looks like:</p>
+<ul>
+<li>Use <code>head()</code> function:
+<ul>
+<li><code>head(myData)</code></li>
+</ul></li>
+<li><p>Look at the top right window, environment tab - gives you a brief summary<br />of the object and Excel-like view of the data</p></li>
+<li>Use <code>str()</code> help function
+<ul>
+<li>str(myData)</li>
+</ul></li>
+</ul>
+<p>Method 2. Use read.table() function</p>
+<p><strong>Challenge</strong> Use help functions to read about read.table <code>?read.table()</code> or <code>args(read.table)</code><br />and use it load file into R. It might be helpful to compare <code>args(read.csv)</code> and <code>args(read.table)</code></p>
+<p>Look at <code>dim(myData)</code> output after each try. Is it different? Why?</p>
+<p><strong>Answer</strong> * myData2&lt;-read.table(“gapminderData.csv”, header=TRUE, sep = “,”)</p>
+<p>Unless we record the data, we do not know its format. It is easiest to take a look at the data<br />with other tools. How would you use bash shell to see the format of gapminderData.csv?</p>
+</div>
+<div id="subsetting" class="section level3">
+<h3>Subsetting</h3>
+<p><em><a href="https://github.com/swcarpentry/r-novice-gapminder/blob/gh-pages/06-data-subsetting.Rmd">https://github.com/swcarpentry/r-novice-gapminder/blob/gh-pages/06-data-subsetting.Rmd</a></em></p>
+<p>Let’s learn how to extract elements from various data structures:</p>
+<ul>
+<li><p>vectors: <code>x &lt;- c(1:10)' * by index: y&lt;-x[3:4]; \ The square brackets operator is just like any other function. For atomic vectors \ (and matrices), it means &quot;get me the nth element&quot;. * If we use a negative number as the index of a vector, R will return \ every element *except* for the one specified:</code>y&lt;-x[-c(3:4)]`</p></li>
+<li><p>Factor subsetting:</p></li>
+</ul>
+<p>Now that we’ve explored the different ways to subset vectors, how do we subset the other data structures?</p>
+<p>Factor subsetting works the same way as vector subsetting.</p>
+<pre class="r"><code>f &lt;- factor(c(&quot;a&quot;, &quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;c&quot;, &quot;d&quot;))
+f[f == &quot;a&quot;]</code></pre>
+<pre><code>## [1] a a
+## Levels: a b c d</code></pre>
+<pre class="r"><code>f[f %in% c(&quot;b&quot;, &quot;c&quot;)]</code></pre>
+<pre><code>## [1] b c c
+## Levels: a b c d</code></pre>
+<pre class="r"><code>f[1:3]</code></pre>
+<pre><code>## [1] a a b
+## Levels: a b c d</code></pre>
+<p>Matrices are also subsetted using the <code>[</code> function. In this case it takes two arguments: the first applying to the rows, the second to its columns:</p>
+<pre class="r"><code>set.seed(1)
+m &lt;- matrix(rnorm(6*4), ncol=4, nrow=6)
+m[3:4, c(3,1)]</code></pre>
+<pre><code>##             [,1]       [,2]
+## [1,]  1.12493092 -0.8356286
+## [2,] -0.04493361  1.5952808</code></pre>
+<p>You can leave the first or second arguments blank to retrieve all the rows or columns respectively:</p>
+<pre class="r"><code>m[, c(3,4)]</code></pre>
+<pre><code>##             [,1]        [,2]
+## [1,] -0.62124058  0.82122120
+## [2,] -2.21469989  0.59390132
+## [3,]  1.12493092  0.91897737
+## [4,] -0.04493361  0.78213630
+## [5,] -0.01619026  0.07456498
+## [6,]  0.94383621 -1.98935170</code></pre>
+</div>
+<div id="list-subsetting" class="section level2">
+<h2>List subsetting</h2>
+<p>Now we’ll introduce some new subsetting operators. There are three functions used to subset lists. <code>[</code>, as we’ve seen for atomic vectors and matrices, as well as <code>[[</code> and <code>$</code>.</p>
+<p>Using <code>[</code> will always return a list. If you want to <em>subset</em> a list, but not <em>extract</em> an element, then you will likely use <code>[</code>.</p>
+<pre class="r"><code>xlist &lt;- list(a = &quot;Software Carpentry&quot;, b = 1:10, data = head(iris))
+xlist[1]</code></pre>
+<pre><code>## $a
+## [1] &quot;Software Carpentry&quot;</code></pre>
+<p>This returns a <em>list with one element</em>.</p>
+<p>We can subset elements of a list exactly the same was as atomic vectors using <code>[</code>. Comparison operations however won’t work as they’re not recursive, they will try to condition on the data structures in each element of the list, not the individual elements within those data structures.</p>
+<pre class="r"><code>xlist[1:2]</code></pre>
+<pre><code>## $a
+## [1] &quot;Software Carpentry&quot;
+## 
+## $b
+##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+<p>To extract individual elements of a list, you need to use the double-square bracket function: <code>[[</code>.</p>
+<pre class="r"><code>xlist[[1]]</code></pre>
+<pre><code>## [1] &quot;Software Carpentry&quot;</code></pre>
+</div>
+<div id="end-of-intro-to-r-lesson" class="section level2">
+<h2>END of Intro to R lesson</h2>
+</div>
+<div id="skip" class="section level2">
+<h2>Skip</h2>
+<p>We can add columns or rows to a data.frame using <code>cbind</code> or <code>rbind</code> (these are the two-dimensional equivalents of the <code>c</code> function):</p>
+<div id="adding-columns-to-a-data-frame" class="section level4">
+<h4>Adding columns to a data frame</h4>
+<p>To add a column we can use <code>cbind</code>:</p>
+<p>df &lt;- cbind(df, count=c(6:1)</p>
+<p>Add rows: (this will not work, need factor conversion, have a different example of adata frame,<br />just mention rbind)</p>
 </div>
 <div id="help-functions" class="section level3">
 <h3>Help functions</h3>
@@ -234,8 +595,9 @@ img {
 <h4>Lists as output</h4>
 <p>Not sure if will use</p>
 </div>
-<div id="subsetting" class="section level4">
+<div id="subsetting-1" class="section level4">
 <h4>Subsetting</h4>
+</div>
 </div>
 </div>
 </div>
