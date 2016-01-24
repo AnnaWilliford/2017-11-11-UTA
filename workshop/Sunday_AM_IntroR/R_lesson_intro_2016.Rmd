@@ -1,0 +1,183 @@
+---
+title: "R basics"
+author: "Anna Williford"
+date: "Saturday, January 23, 2016"
+output: html_document
+---
+
+###Topics covered
+
+* General introduction to R
+* RStudio
+* Variables
+* Data Types
+* Data Structures
+    * Emphasis on Data Frame
+* Subsetting data
+
+Lessons are based on Topics1-6 of http://swcarpentry.github.io/r-novice-gapminder/
+
+##Introduction to R
+
+* statistical analysis, graphiscs, general purpose programming (show R graphics galery)
+* open source, very active contributing community
+* thousands of packages - widely used across many disciplines (some stats on this usage???) 
+
+##Introduction to R studio
+
+###manage projects
+
+###running interactive sessions (immediate output)
+* calculator
+    * `3+8`
+    * `34/2`
+    * `4**3`
+* text
+    * `This is text`
+* functions
+    * `getwd()` notice paranthesis - indicates that this is a function
+
+* functions with arguments
+
+    * `sqrt(4)`  4 here is a value passed to `sqrt()` function.
+Functions operate on objects that are enclosed in paranthesis
+
+**Challenge**
+
+Print the value of `sqrt(4)` using `print()` function. Try: 
+
+`print 2`, `print(2)`, `print sqrt(4)` and `print(sqrt(4))`
+
+Notice: *functions can be nested*
+
+
+##The very basics of R
+###Variables, data types, data structures
+
+####Variables:
+* assigning values to a variable
+
+####Data Types:
+* numeric
+    * integer
+    * double
+* character
+* logical
+* complex
+
+typeof() # what is its atomic type?
+is.logical() # is it TRUE/FALSE data?
+is.numeric() # is it numeric?
+is.integer() # is it an integer?
+is.complex() # is it complex number data?
+is.character() # is it character data?
+str()  # what is it?
+
+####Data Structures:
+* vectors
+    * to create: 
+    * to access elements
+* lists
+    * to create:
+    * to access:
+        * list elements
+        * elements with list elements
+* factors
+* matrix
+* data frames
+
+
+
+###Help functions
+There are many help function available to orient you in R
+
+* Help with functions:
+
+    * `?print`
+     
+    * `args(plot)`
+    
+* Help with data types
+
+
+* Help with data structures
+
+Distribute below functions to fit above heading..
+class() # what is the data structure?
+typeof() # what is its atomic type?
+length() # how long is it? What about two dimensional objects?
+attributes() # does it have any metadata?
+str() # A full summary of the entire object
+dim() # Dimensions of the object - also try nrow(), ncol()
+
+**Challenges**
+Ask to construct various data structures
+
+###Working with data frames
+
+Download gapminder dataset:
+
+* Set directory to your project directory
+
+    * `setwd()`
+
+To download from shell (use Git Bash we worked with earlier): [add URL to etherpad]
+
+* `curl -O https://annawilliford.github.io/2016-01-30-UTA/data/gapminderData.csv`
+
+To download from R:
+
+* `download.file("https://annawilliford.github.io/2016-01-30/data/gapminderData.csv", destfile="gapminderData.txt", method="libcurl")`
+
+&nbsp;&nbsp;&nbsp;&nbsp;At this point you just have the data file in the directory of your choice. \
+&nbsp;&nbsp;&nbsp;&nbsp;Take a look at your directory structure in the bottom right window under Files tab
+
+To load data into R: assign file to a variable `myData`
+Method 1:
+
+* `myData<-read.csv("gapminderData.csv")`
+
+Take a look at a new object
+
+* `myData`
+
+A bit hard to see?
+Different ways to see what your object looks like: 
+
+* Use `head()` function:
+    * `head(myData)`
+
+* Look at the top right window, environment tab - gives you a brief summary \
+of the object and Excel-like view of the data
+
+* Use `str()` help function
+    * str(myData)
+
+Method 2. Use read.table() function
+
+**Challenge**
+Use help functions to read about read.table `?read.table()` or `args(read.table)` \
+and use it load file into R. It might be helpful to compare `args(read.csv)` and `args(read.table)`
+
+Look at `dim(myData)` output after each try. Is it different? Why?
+
+**Answer**
+* myData2<-read.table("gapminderData.csv", header=TRUE, sep = ",")
+
+Unless we recorder the data, we do not know its format. It is easiest to take a look at the data \
+with other tools.  How would you use bash shell to see the format of gapminderData.csv?
+
+####Understanding your data structure.
+Use functions below to understnd your data set:
+class() # what is the data structure?
+typeof() # what is its atomic type?
+length() # how long is it? What about two dimensional objects?
+attributes() # does it have any metadata?
+str() # A full summary of the entire object
+dim() # Dimensions of the object - also try nrow(), ncol()
+
+####Lists as output
+Not sure if will use
+
+####Subsetting
+
