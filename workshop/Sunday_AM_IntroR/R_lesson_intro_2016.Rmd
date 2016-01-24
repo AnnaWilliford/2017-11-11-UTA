@@ -19,9 +19,11 @@ Lessons are based on Topics1-6 of http://swcarpentry.github.io/r-novice-gapminde
 
 ##Introduction to R
 
-* statistical analysis, graphiscs, general purpose programming (show R graphics galery)
-* open source, very active contributing community
-* thousands of packages - widely used across many disciplines (some stats on this usage???) 
+* after Robert Gentleman and Ross Ihaka and the Bell Labs language ‘S’ 
+* statistical analysis, graphics, general purpose programming
+* open source, active contributing community, documentation
+* basic installation includes a handful of packages, but thousands are available
+
 
 ##Introduction to R studio
 
@@ -51,8 +53,7 @@ Print the value of `sqrt(4)` using `print()` function. Try:
 Notice: *functions can be nested*
 
 
-##The very basics of R
-###Variables, data types, data structures
+##Variables, data types, data structures
 
 ####Variables:
 * assigning values to a variable
