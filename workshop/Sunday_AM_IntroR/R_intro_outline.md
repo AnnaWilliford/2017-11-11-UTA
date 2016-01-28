@@ -40,4 +40,20 @@ https://annawilliford.github.io/2016-01-30-UTA/data/gapminderData.csv
 
 * R packages
 
+
+## 2. Data types and Data structures
+
+###Data types
+
+* Data types (5): age; age1; name; young
+
+* Help functions to identify data types: is.integer()
+
+* Together `score<-79` exercise - use nested help funcions
+
+    *Challenge 2.1
+    
+* Functions to convert one data type into another. Not always possible: as.integer(name)
+
+###**Data Structures**
   
