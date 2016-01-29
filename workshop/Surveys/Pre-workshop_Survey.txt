@@ -1,5 +1,6 @@
 
-Pre-, post- and delayed workshop surveys 
+Software Carpentry workshop
+Pre-workshop survey: Jan30 2016
 
 You will be asked to answer a series of questions related to data exploration, manipulation and analysis.
 You can consult any resources available to you (i.e. webpages, programming languages, Excel, or text editors). 
