@@ -6,7 +6,7 @@ output: html_document
 * Greetings
 * Setup Etherpad: http://pad.software-carpentry.org/2016-01-30-UTA
 * Workshop website: https://annawilliford.github.io/2016-01-30-UTA
-* Links to add to etherpad
+* Links to add to etherpad: DATA + Resources
 https://annawilliford.github.io/2016-01-30-UTA/data/gapminderData.csv
 
 
@@ -34,6 +34,7 @@ https://annawilliford.github.io/2016-01-30-UTA/data/gapminderData.csv
       * Which way do you like better? Beginers -> console to editor; later on -> editor to console
     * Go to Sunday_AM directory
         * setwd("C:/Users/Anna/SCW_Jan2016/Sunday_AM")
+        * make `Data` folder:`dir.create("Sunday_AM")`
         * Let's save our R script as myRcommands.R
     
 * **Q** You can navigate through your file system(folders) using navigation bar in the bottom right panel, Files folder. Try it. 
@@ -82,8 +83,10 @@ Why do you think it might be useful to use commands rather than GUI?
     * You can make a package available for use with `library(packagename)`
     
     *ex:
-        * install.packages("ggplot2")
-        * library(ggplot2)
+        * install.packages("knitr")
+        * library(knitr)
+
+[took me 44 minutes first time (from the begining!]
 
 ## 2. Data types and Data structures
 
@@ -142,6 +145,8 @@ There are functions to convert one data type into another. Not always possible:
 * `y<-as.integer("UTA")`  output: NA: special object = missing value
 * `y<-as.integer("TRUE")` you can guess/check `y<-as.integer("FALSE")`
 
+[Data types talk with challenge: 15 min]
+
 ###**Data Structures**
 
 Now we are getting to something interesting. So far we made single-element objects. We can now combine them to make more complex objects, or *data structures*
@@ -155,6 +160,13 @@ To practice you Linux shell skills, download fom the command line:
 * Open Git Bash-> cd to SCW_Jan2016/Sunday_AM --> mkdir data --> cd data
 * `curl -O https://annawilliford.github.io/2016-01-30-UTA/data/gapminderData.csv`
 * Open in Excel 
+
+```
+If needed but hopefully all can do from git bash
+To download from R:
+
+* `download.file("https://annawilliford.github.io/2016-01-30/data/gapminderData.csv", destfile="gapminderData.txt", method="libcurl")`
+```
   
 This table is represented by a single object in R, known as a data frame.
 But it is made up of smaller structures that in turn are made up of the basic single-element data types.
@@ -180,6 +192,8 @@ But it is made up of smaller structures that in turn are made up of the basic si
         * vectorization: function operates on all elements of a vector without a need for a loop:
             * `v2<-2*v`; `v3<-c(1:4)`; `v4<-v2+v3`
 
+[ 10 min on vestors]
+
 * ####Matrices: multi-dimensional vectors:
     * must contain elements of the **same data type**
     * create with matrix():
@@ -199,12 +213,34 @@ But it is made up of smaller structures that in turn are made up of the basic si
         
 * ####Lists: generic vector
     * usually contain elements of **different data types**
-    * to create, use list() function: `l<-list(4,"dogs",TRUE)`
+    * to create, use list() function: `l<-list(4,"dogs",TRUE)` OR Refer to gapminder dataset to record a raw as a list
     * **Challenge 2.2** Try to make a more complex list (`myOrder`) that  contains other data structures as list elements
-    
+
+**Challenge 2.2**  Learn how to construct lists
+
+```
+Try to create a list named `myOrder` that contains the following data structures as list elements:
+
+* Element 1 is a character vector of length 4 that lists the menu items you ordered from the restaurant
+* Element 2 is a factor that describes menu items as "liquid" or "solid"
+* Element 3 is a list that contains the address of the restaurant and the total dollar amount of your order
+
+    *Hint: Define your elements first, than create a list with them.
+```       
+**Answer**
+```
+menuItems<-c("chicken", "soup", "salad", "tea")
+menuType<-factor(c("solid", "liquid", "solid", "liquid"))
+otherInfo<-list("Abram st", 12.56)
+
+myOrder<-list(menuItems, menuType, otherInfo)
+```
+
+
     **Together** Ask to apply the following functions to the list they created
-    * examine: `length(myOrderInfo)` - unexpected output?
-    * `str(myOrderInfo)`
+    * view your list
+    * examine: `length(myOrder)` - unexpected output?
+    * `str(myOrder)`
     
 
 * ####Data Frames 
@@ -215,17 +251,19 @@ Now we are ready to explore data frames. Go back to you Excel with gapminder dat
 Let's modify our `myOrder` list to construct a data frame. What should we change?
 ```
 menuItems<-c("chicken", "soup", "salad", "tea")
-menuType<-(factor(c("solid", "liquid", "solid", "liquid"))
+menuType<-factor(c("solid", "liquid", "solid", "liquid"))
 menuCost<-c(3.99, 2.99, 4.69, 2.09)
 ```
 Combine as a list:
 
 * `myOrder<-list(menuItems, menuType, menuCost)`
 * Check with `str()`; keeps the data  types we asigned
+* View it! Does not look like our dataset...
 
 Now combine as data.frame. Ask students to do that. Give it a different name, `myOrder_df`. Why?
 
 * `myOrder_df<-data.frame(menuItems, menuType, menuCost)`
+* view it! Magic...
 * Check with `str()`; keeps the data types we asigned???
 
 ## 3. General subsetting rules
@@ -237,10 +275,10 @@ Now let's talk about how to extract elements from various data structures. If yo
         * `v[2]` : square brackets operator =   "get me the nth element".
         * `v[c(3:6)]`; `v[c(1,3,c(8:10))]`; `v[-c(3:5)]` ; negative=drop element
         * with `which` function that extracts the position index of the elements with a specified values:`v<-c(1,3,5,5,7,5)`; `v1<-v[which(v==7)]` 
-        * for multidimentional structures (matrices and dataframes) use [row, column] index to extract individual elements
+        * for 2D structures (matrices and dataframes) use [row, column] index to extract individual elements
             * Use `myOrder_df` dataframe: get first3 rows:
                 * `myOrder_df[1:3, ]`
-    * By name index: If the elements of your data structures have names, you can extract the value by name:
+    * By name index: If the elements of your data structures have names, you can get the subset  by name: [returned object will be of the same data structure if ["name"], and will extract a vector element when using `$`]
         * name our `myOrder` list: `names(myOrder)<-c("item", "type","cost")`
         * extract the first element of the list by name: `myOrder["item"]`
             * what type of data structure is returned? `str()`, `typeof()` --> LIST
@@ -277,6 +315,10 @@ A bit hard to see? Different ways to see what your object looks like:
 * Method 2. Use `read.table()` function
 
 **Challenge 4.1** Purpose: read data into R.
+
+**Answer**
+* myData2<-read.table("gapminderData.csv", header=TRUE, sep = ",")
+
 
 **Together** Now we know how read in dataframes into R. Let's play with this dataset to go over what we talked about this morning.
 
