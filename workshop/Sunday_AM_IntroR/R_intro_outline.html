@@ -72,76 +72,138 @@ img {
 <h2>Morning checklist</h2>
 <ul>
 <li>Greetings</li>
-<li>Setup Etherpad: <a href="http://pad.software-carpentry.org/2016-01-30-UTA" class="uri">http://pad.software-carpentry.org/2016-01-30-UTA</a></li>
+<li>Setup Etherpad: <a href="http://pad.software-carpentry.org/2016-01-30-UTA" class="uri">http://pad.software-carpentry.org/2016-01-30-UTA</a> SHOW HOW TO SAVE ETHERPAD</li>
 <li>Workshop website: <a href="https://annawilliford.github.io/2016-01-30-UTA" class="uri">https://annawilliford.github.io/2016-01-30-UTA</a></li>
-<li>Links to add to etherpad <a href="https://annawilliford.github.io/2016-01-30-UTA/data/gapminderData.csv" class="uri">https://annawilliford.github.io/2016-01-30-UTA/data/gapminderData.csv</a></li>
+<li>Links to add to etherpad: DATA + Resources:
+<ul>
+<li><a href="https://annawilliford.github.io/2016-01-30-UTA/data/gapminderData.csv" class="uri">https://annawilliford.github.io/2016-01-30-UTA/data/gapminderData.csv</a></li>
+<li><a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a></li>
+<li><a href="https://cran.r-project.org/doc/manuals/r-release/R-lang.html" class="uri">https://cran.r-project.org/doc/manuals/r-release/R-lang.html</a></li>
+<li><a href="https://cran.r-project.org/doc/contrib/Short-refcard.pdf" class="uri">https://cran.r-project.org/doc/contrib/Short-refcard.pdf</a></li>
+<li><a href="http://www.introductoryr.co.uk/R_Resources_for_Beginners.html" class="uri">http://www.introductoryr.co.uk/R_Resources_for_Beginners.html</a></li>
+<li>link to the file in the Dropbox (every time I save, you refresh and get updated version)</li>
+</ul></li>
+<li>keep you gapminder data open in Excel</li>
+<li>keep you R_challenges.Rmd open -&gt; copy to R script when need them and have answer ready too. Copy them when challenge is done</li>
+<li>Start you session from the Dropbox/Public/Software Carpentry directory. When you save your Rcommands.R file to Sunday_AM, copy the link address and copy it etherpad to make it available to all.</li>
 </ul>
 </div>
 <div id="intro-to-rstudio" class="section level2">
 <h2>1. Intro to RStudio</h2>
 <ul>
-<li><p>Why R <br></p></li>
+<li><p>Why R</p></li>
 <li><p>RStudio as interface for R(IDE)</p></li>
 <li><p>The 4 Windows of R studio</p>
 <ul>
 <li>Navigation Commands
 <ul>
-<li>…</li>
-<li>Challenge 1.1</li>
+<li><code>getwd()</code>, <code>setwd()</code></li>
+<li><strong>Challenge 1.1</strong></li>
 </ul></li>
 <li>Command flow
 <ul>
-<li>…</li>
-<li>Go to Sunday_AM, save file “MyRcommands.R”</li>
+<li>Console to R scipt; Rscript to console</li>
+<li>Make <code>Sunday_AM</code> (<code>dir.create()</code>), go to <code>Sunday_AM</code>, save file “MyRcommands.R”, make <code>data</code> folder</li>
 </ul></li>
 <li>More on console
 <ul>
 <li>complete commands; <code>Esc</code> to return to <code>&gt;</code></li>
-<li>output is not reusable <br><br></li>
+<li>output is not reusable</li>
 </ul></li>
 </ul></li>
+</ul>
+<div id="took-20-min-can-cut-to-10-can-do-in-15" class="section level4">
+<h4>took 20 min !!! Can cut to 10? Can do in 15</h4>
+<p><br></p>
+<ul>
 <li>Variables and Assignment
 <ul>
-<li>Challenge 1.2 <br><br></li>
+<li>Assignment operator: &lt;- (Alt+dash)</li>
+<li><code>cost &lt;- 34</code>; <code>cost2 &lt;- cost*2</code>; <code>cost &lt;- cost +2</code>:</li>
+<li><strong>Challenge 1.2</strong></li>
+<li>variable names</li>
 </ul></li>
-<li><p>Manage environment</p></li>
-<li><p>Help functions for functions</p></li>
-<li><p>R packages</p></li>
 </ul>
+</div>
+<div id="took-9-min-cut-to-5" class="section level4">
+<h4>took 9 min! Cut to 5?</h4>
+<p><br></p>
+<ul>
+<li>Manage environment
+<ul>
+<li><code>ls()</code>, <code>rm()</code></li>
+</ul></li>
+<li>Help functions for functions
+<ul>
+<li><code>?plot</code></li>
+<li><code>args(setwd)</code></li>
+<li><code>help(mean)</code></li>
+</ul></li>
+<li>R packages
+<ul>
+<li><code>install.package(&quot;knitrd&quot;)</code></li>
+<li><code>library(knitrd)</code></li>
+</ul></li>
+</ul>
+</div>
+<div id="took-6-min" class="section level4">
+<h4>Took 6 min</h4>
+</div>
 </div>
 <div id="data-types-and-data-structures" class="section level2">
 <h2>2. Data types and Data structures</h2>
-<div id="data-types" class="section level3">
-<h3>Data types</h3>
+<div id="show-dataset" class="section level4">
+<h4>Show dataset</h4>
 <ul>
-<li><p>Data types (5): age; age1; name; young</p></li>
-<li><p>Help functions to identify data types: is.integer()</p></li>
-<li><p>Together <code>score&lt;-79</code> exercise - use nested help funcions</p>
-<p>*Challenge 2.1</p></li>
-<li><p>Functions to convert one data type into another. Not always possible: as.integer(name)</p></li>
-</ul>
-<p>[Data types talk with challenge: 15 min]</p>
-</div>
-<div id="data-structures" class="section level3">
-<h3><strong>Data Structures</strong></h3>
-<ul>
-<li><p>Now is time for interesting things! Data types can be combined into bigger structures - Data Structures. But first let’s take a look at the dataset we will be using this morning</p></li>
-<li><p>make sure you have <code>data</code> folder in Sunday_AM directory</p></li>
 <li>little bash practice lesson…open Git bash, navigate to <code>data</code> folder, then download file.
 <ul>
 <li><code>curl -O https://annawilliford.github.io/2016-01-30-UTA/data/gapminderData.csv</code></li>
 <li>Open in Excel</li>
 </ul></li>
-<li>any ideas about how this kind of dataset can be represented in R?</li>
-<li><p>what would be simplest data structure? simplest way to combine the single-element objects? what is the simplest data structure with multiple elements?</p></li>
+<li>any ideas about how this kind of dataset can be represented in R? In R this whole dataset is an object built/data structure built out of smaller pieces…Think of a castle built of legos. We want to understand how to built a castle and how to take it apart. An example of a castle is this data set ( in R it is known as dataframe) and it is relatively simple, but it will do for now. Let’s break into samallest pieces and built it up from scratch.</li>
+</ul>
+</div>
+<div id="smallest-units-in-r-single-element-data-structures" class="section level3">
+<h3>Smallest units in R: single-element data structures</h3>
+<p>When we create a variable “age” and asign the value of 45, we just created the smallest lego piece (smallest object) in R:</p>
+<ul>
+<li>age &lt;- 45
+<ul>
+<li>length(age)</li>
+<li>str(age)</li>
+</ul></li>
+</ul>
+<p>Variable can hold values of various types. Most common data types:</p>
+<ul>
+<li>numeric(double+integer); character; logical; complex; raw</li>
+<li>Together <code>score&lt;-79</code> exercise - use nested help funcions</li>
+<li>Help functions to identify data types: is.integer()</li>
+<li><p><code>typeof(score)</code>, <code>is.integer(score)</code>, <code>typeof(is.integer(score))</code></p>
+<ul>
+<li><strong>Challenge 2.1</strong></li>
+</ul></li>
+<li>Functions to convert one data type into another. Not always possible:
+<ul>
+<li><code>typeof(score)</code>; <code>score &lt;- as.integer(score)</code>; <code>typeof(score)</code></li>
+<li><code>name &lt;- &quot;Sasha&quot;</code>; <code>name &lt;- as.integer(name)</code>; <code>typeof(name)</code>; NA=missing value</li>
+</ul></li>
+</ul>
+<div id="took-5-min-challenge" class="section level4">
+<h4>Took 5 min + challenge</h4>
+</div>
+</div>
+<div id="data-structures-with-multiple-elements" class="section level3">
+<h3>Data structures with multiple elements</h3>
+<p>The small objects can be combined to built larger objects. Look at the Excel dataset. Our smallest objects can be used to represent a single element in the dataset, like individual year, or individual country, but what would be the simplest object that you can make with multiple elements?</p>
+<ul>
 <li>vectors: REFER TO gapminer dataset
 <ul>
 <li>elements of the same data type</li>
 <li>how to create c()</li>
 <li>let’s make one: v&lt;-c(1:3, 45)
 <ul>
-<li>examine: typeof(), str(); bash-like commands; tail(v,n=2), head(), length()</li>
-<li>look at: tail(v,n=2), head(), length()</li>
+<li>examine: typeof(), str()</li>
+<li>make a long one: v2 &lt;- seq(20,100, by=2) *look at: tail(v,n=2), head(), length()</li>
 <li><p>manipulate:</p>
 <ul>
 <li>add element: v&lt;-(v, 56)</li>
@@ -151,56 +213,43 @@ img {
 </ul></li>
 </ul></li>
 </ul></li>
-<li><p>matrices – multidimensional vectors (skip) *create: matrix(c(1:18), 3,6)</p></li>
+<li>matrices – multidimensional vectors (skip?)
+<ul>
+<li>create: matrix(c(1:18), 3,6)</li>
+</ul></li>
 <li>factors–categorical data – refer to dataset
 <ul>
 <li>create: factor(c())</li>
-<li>str(), typeof()</li>
-<li>reorder</li>
+<li>str(), typeof() – why important</li>
+<li>reorder (skip?)</li>
 </ul></li>
+<li><h4>factors took 7 minutes - shorten</h4></li>
 <li>list : generic vector – reffer to data, record a row as a a list
 <ul>
 <li>different data types</li>
 <li>create: list()</li>
 <li>str(), typeof()</li>
 <li>length()</li>
-<li><strong>CHALLENGE</strong></li>
-</ul>
-<p><strong>Challenge 2.2</strong> Learn how to construct lists</p></li>
-</ul>
-<pre><code>Try to create a list named `myOrder` that contains the following data structures as list elements:
-
-* Element 1 is a character vector of length 4 that lists the menu items you ordered from the restaurant
-* Element 2 is a factor that describes menu items as &quot;liquid&quot; or &quot;solid&quot;
-* Element 3 is a list that contains the address of the restaurant and the total dollar amount of your order
-
-    *Hint: Define your elements first, than create a list with them.</code></pre>
-<p><strong>Answer</strong></p>
-<pre><code>menuItems&lt;-c(&quot;chicken&quot;, &quot;soup&quot;, &quot;salad&quot;, &quot;tea&quot;)
-menuType&lt;-factor(c(&quot;solid&quot;, &quot;liquid&quot;, &quot;solid&quot;, &quot;liquid&quot;))
-otherInfo&lt;-list(&quot;Abram st&quot;, 12.56)
-
-myOrder&lt;-list(menuItems, menuType, otherInfo)</code></pre>
-<p><strong>Together</strong> Ask to apply the following functions to the list they created</p>
-<p>Veiw it Examine: <code>length(myOrder)</code> - unexpected output? `str(myOrder) <br><br></p>
+<li><strong>CHALLENGE 2.2</strong></li>
+</ul></li>
+<li><strong>Together</strong> Ask to apply the following functions to the list they created
 <ul>
+<li>Veiw it</li>
+<li>Examine: <code>length(myOrder)</code> - unexpected output?</li>
+<li><code>str(myOrder)</code> - keeps the data types we asigned <br><br></li>
+</ul></li>
 <li><p>Data frames</p>
 <ul>
 <li>Back to gapminder</li>
 <li>Could you make an informative guess about how this data structure can be represented in R?</li>
 </ul></li>
 </ul>
-<p><strong>Yes!</strong> It is a list of vectors of equal length. Let’s modify our <code>myOrder</code> list to construct a data frame. What should we change?</p>
-<pre><code>menuItems&lt;-c(&quot;chicken&quot;, &quot;soup&quot;, &quot;salad&quot;, &quot;tea&quot;)
-menuType&lt;-factor(c(&quot;solid&quot;, &quot;liquid&quot;, &quot;solid&quot;, &quot;liquid&quot;))
-menuCost&lt;-c(3.99, 2.99, 4.69, 2.09)</code></pre>
-<p>Combine as a list:</p>
+<p><strong>Yes!</strong> It is a list of vectors of equal length. Let’s look at our <code>myOrder</code> list to see if we can make data frame out of it. Is the list we just made suitable for a data frame? Yes, the elements of the list are vectors of equal size. [but they do not have to to be list elements]</p>
+<p>Previously we used list() to combine our elements</p>
 <ul>
 <li><code>myOrder&lt;-list(menuItems, menuType, menuCost)</code></li>
-<li>View it! Does not look like our dataset…</li>
-<li>Check with <code>str()</code>; keeps the data types we asigned</li>
 </ul>
-<p>Now combine as data.frame. Ask students to do that. Give it a different name, <code>myOrder_df</code>. Why?</p>
+<p>Now let’s combine with data.frame(). Ask students to do that. Give it a different name, <code>myOrder_df</code>. Why?</p>
 <ul>
 <li><code>myOrder_df&lt;-data.frame(menuItems, menuType, menuCost)</code></li>
 <li>view it! Magic..</li>
@@ -208,14 +257,15 @@ menuCost&lt;-c(3.99, 2.99, 4.69, 2.09)</code></pre>
 </ul>
 </div>
 </div>
-<div id="general-subsetting-rules" class="section level2">
-<h2>3. General subsetting rules</h2>
+<div id="general-subsetting-rules-taking-your-castle-apart" class="section level2">
+<h2>3. General subsetting rules… Taking your castle apart…</h2>
 <ul>
 <li>Three general ways to subset the data
 <ul>
 <li>By position index: <code>v&lt;-c(1:10)</code>; v[2]; v[c(3:6)]; v[-c(3:5)]
 <ul>
 <li>with <code>which</code> function that extracts the position index of the elements with a specified values:<code>v&lt;-c(1,3,5,5,7,5)</code>; <code>v1&lt;-v[which(v==7)]</code></li>
+<li>works for lists too - notice that returns list, to get vector, use [[]]</li>
 <li>for 2D structures (matrices and dataframes) use [row, column] index to extract individual elements
 <ul>
 <li>Use <code>myOrder_df</code> dataframe: get first3 rows:
@@ -224,7 +274,7 @@ menuCost&lt;-c(3.99, 2.99, 4.69, 2.09)</code></pre>
 </ul></li>
 </ul></li>
 </ul></li>
-<li>By name
+<li>By name [only talk about $ operator, by name, but gets you an element as vector,not as data frame]
 <ul>
 <li>name our <code>myOrder</code> list: <code>names(myOrder)&lt;-c(&quot;item&quot;, &quot;type&quot;,&quot;cost&quot;)</code></li>
 <li>extract the first element of the list by name: <code>myOrder[&quot;item&quot;]</code>
@@ -262,17 +312,21 @@ menuCost&lt;-c(3.99, 2.99, 4.69, 2.09)</code></pre>
 <ul>
 <li><code>myData&lt;-read.csv(&quot;gapminderData.csv&quot;)</code></li>
 <li>Take a look at the new object <code>myData</code></li>
+<li>A bit hard to see? Different ways to see what your object looks like:
+<ul>
+<li>Use <code>head()</code> function:
+<ul>
+<li><code>head(myData)</code></li>
+</ul></li>
+<li>Look at the top right window, environment tab - gives you a brief summary of the object and Excel-like format</li>
+</ul></li>
+</ul></li>
+<li><p>Method 2. Use <code>read.table()</code> function</p></li>
+<li><p><strong>Challenge 4.1</strong> Purpose: read data into R.</p>
+<ul>
+<li><strong>Answer</strong> myData2&lt;-read.table(“gapminderData.csv”, header=TRUE, sep = “,”)</li>
 </ul></li>
 </ul>
-<p>A bit hard to see? Different ways to see what your object looks like:</p>
-<pre><code>* Use `head()` function:
-    * `head(myData)`
-* Look at the top right window, environment tab - gives you a brief summary of the object and Excel-like format</code></pre>
-<ul>
-<li>Method 2. Use <code>read.table()</code> function</li>
-</ul>
-<p><strong>Challenge 4.1</strong> Purpose: read data into R.</p>
-<p><strong>Answer</strong> * myData2&lt;-read.table(“gapminderData.csv”, header=TRUE, sep = “,”)</p>
 <p><strong>Together</strong> Now we know how read in dataframes into R. Let’s play with this dataset to go over what we talked about this morning.</p>
 <pre><code>* Overall object structure?
 * Can you tell what is the data type of elements in each cloumn?
